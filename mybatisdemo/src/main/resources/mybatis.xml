@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+    <!--打印执行日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--扫描entily包-->
+    <typeAliases>
+        <package name="com.liu.entity"/>
+    </typeAliases>
+
+    <!--配置数据源，数据库连接信息，支持配置多个配置源-->
+    <environments default="development">
+        <!--数据库连接信息 可以同时配置多个数据库-->
+        <environment id="development">
+            <!--配置事务管理模式，让mybatis采用jdbc的管理模式-->
+            <transactionManager type="JDBC"/>
+
+            <!--配置连接池，数据库连接信息，type属性在指明是那个连接池，pooled是mybatis自带的连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/sell?useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.liu.mapper"/>
+    </mappers>
+</configuration>

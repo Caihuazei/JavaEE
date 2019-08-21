@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.mapper.OrderMapper">
+
+    <resultMap id="orderMap" type="Order">
+        <id column="order_id" property="orderId"/>
+        <result column="status" property="status"/>
+        <result column="member_id" property="memberId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!--遍历元素-->
+    <select id="listOrder" resultMap="orderMap">
+        select <include refid="all"/>  from s_order
+    </select>
+
+    <!--添加元素-->
+    <insert id="addOrder" >
+        insert into s_order (order_id,status,member_id) values ( #{orderId}, #{status}, #{memberId})
+    </insert>
+
+    <!--更改元素-->
+    <update id="updateOrderByMemberId">
+        update s_order set status = #{arg2}, order_id = #{arg1} where member_id = #{arg0}
+    </update>
+
+    <!--根据用户ID删除-->
+    <delete id="delteByMemberId">
+        delete from s_order where member_id = #{aa}
+    </delete>
+
+    <sql id="all">
+        order_id,status,member_id,create_time,update_time
+    </sql>
+</mapper>
